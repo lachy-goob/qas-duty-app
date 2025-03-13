@@ -9,10 +9,3 @@ export default function Page() {
     return <p>Case: {router.query.id}</p>
 }
 
-export async function getStaticPaths() {
-
-}
-
-export async function getStaticProps({ params }) {
-    
-}
