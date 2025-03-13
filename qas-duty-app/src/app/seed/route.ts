@@ -62,10 +62,13 @@ async function seedUsers() {
 
 export async function GET() {
     try {
-      const result = await sql.begin((sql) => [
+
+      const result = await sql.begin((sql) => [ // eslint-disable-line
         seedUsers(),
         seedJobs(),
       ]);
+
+      console.log(result);
   
       return Response.json({ message: 'Database seeded successfully' });
     } catch (error) {
