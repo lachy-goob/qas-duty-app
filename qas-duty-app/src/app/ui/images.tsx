@@ -25,12 +25,11 @@ export function notfoundgif() {
 
     
     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-
+    console.log("Is the user in Dark Mode? " + isDarkMode)
     setGifSrc(isDarkMode
     ? '/gifs/notfounddark.gif' 
     : '/gifs/notfound.gif');
     },[]);
 
-    return <img src = {gifSrc || undefined} id="404gif" alt="404 Not Found" />
+    return <img src = {gifSrc || undefined} id="404gif" alt="" />
 }

@@ -28,13 +28,15 @@ body {
   flex-direction: column;
 }
 
+header {
+  margin-bottom: auto;
+}
+
 footer {
   margin-top: auto;
 }
 
-header {
-  margin-bottom: auto;
-}
+
 
 
 
