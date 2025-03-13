@@ -1,15 +1,16 @@
 //Utilising Materialised Paths
+import { Job } from "./definitions"
 
-const user = [
+export const users = [
     {
-        id: '1',
+        id: '550e8400-e29b-41d4-a716-446655440000',
         name: 'Lachlan Goebel',
         email: 'lachlangoebel@gmail.com',
         password: 'password',
         path: "1/2/"
     },
     {
-        id: '2',
+        id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
         name: 'Theron Goebel',
         email: 'lgoobdev@gmail.com',
         password: 'password',
@@ -17,22 +18,23 @@ const user = [
     },
 ]
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const job = [
+export const jobs: Job[] = [
     {
-       user_id: user[0].id,
+       id : '1',
+       user_id: users[0].id,
        shiftType: "day",
-       dispatchTime: "2025-01-01T08:00:00",
-       clearTime: "2025-01-01T10:00:00",
+       dispatchTime: new Date("2025-01-01T08:00:00"),
+       clearTime: new Date("2025-01-01T10:00:00"),
        composition: "CCP",
        type: "IHT",
        response: "RSQ Flight"
     },
     {
-        user_id: user[1].id,
+        id : '2',
+        user_id: users[1].id,
         shiftType: "night",
-        dispatchTime: "2025-01-01T19:00:00",
-        clearTime: "2025-01-01T21:30:00",
+        dispatchTime: new Date("2025-01-01T19:00:00"),
+        clearTime: new Date("2025-01-01T21:30:00"),
         composition: "CCP + FMO",
         type: "Primary",
         response: "QAS Road"

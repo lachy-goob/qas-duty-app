@@ -6,25 +6,26 @@ export type User = {
     path: string;
 }
 
-export type job = {
+export type Job = {
     id: string;
-    shiftType: 'day' | 'night';
+    user_id: string;
+    shiftType: string,
     dispatchTime: Date,
     clearTime: Date,
-    composition: 'CCP' | 'CCP + FMO';
-    type: 'IHT' | 'Primary' | 'Modified Primary' | 'Search and Rescue' | 'Winch';
-    response: 'RSQ Flight' | 'RSQ Road' | 'QAS Road'
+    composition:  string,
+    type: string;
+    response: string;
 }
 
 export type jobsTable = {
     id: string;
     name: string;
-    shiftType: 'day' | 'night';
+    shiftType: string,
     dispatchTime: Date,
     clearTime: Date,
-    composition: 'CCP' | 'CCP + FMO';
-    type: 'IHT' | 'Primary' | 'Modified Primary' | 'Search and Rescue' | 'Winch';
-    response: 'RSQ Flight' | 'RSQ Road' | 'QAS Road'
+    composition:  string,
+    type: string;
+    response: string;
 }
 
 export type userTable = {
