@@ -31,5 +31,5 @@ export function NotFoundGif() {
     : '/gifs/notfound.gif');
     },[]);
 
-    return <Image src = {gifSrc || '/gifs/notfound.gif'} id="404gif" alt="" />
+    return <Image unoptimized={true} src = {gifSrc || '/gifs/ZKZg.gif'} id="404gif" alt="" width={500} height={500}/>
 }
