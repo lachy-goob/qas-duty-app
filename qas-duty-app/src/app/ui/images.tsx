@@ -17,7 +17,7 @@ export function qasLogo() {
 }
 
 //404 Not Found GIF
-export function notfoundgif() {
+export function NotFoundGif() {
     const [gifSrc, setGifSrc] = useState<string | null>(null);
 
 
@@ -31,5 +31,5 @@ export function notfoundgif() {
     : '/gifs/notfound.gif');
     },[]);
 
-    return <img src = {gifSrc || undefined} id="404gif" alt="" />
+    return <Image src = {gifSrc || '/gifs/notfound.gif'} id="404gif" alt="" />
 }

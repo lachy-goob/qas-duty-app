@@ -17,6 +17,7 @@ const user = [
     },
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const job = [
     {
        user_id: user[0].id,
@@ -36,5 +37,4 @@ const job = [
         type: "Primary",
         response: "QAS Road"
      },
-
 ]
