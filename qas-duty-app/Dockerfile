@@ -1,0 +1,61 @@
+#Sets the Base Stage
+#node:22-slim is just NPM and Node
+FROM node:22-slim As base
+
+#Sets default Port as 3000, however can be overridden later
+ARG PORT=3000
+
+#Disabled Telemtry data to Vercel Serves
+ENV NEXT_TELEMETRY_DISABLED = 1
+
+#Sets the Default Work Directory
+WORKDIR /app
+
+## Dependencies
+#Install dependencies - Copying only the packages insures that docker can efficiently cache the build process
+# and only run `npm ci`
+FROM base AS dependencies
+COPY package.json package-lock.json
+RUN npm ci
+
+
+#Build
+FROM base as build
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY . .
+
+
+#Public build-time environment variables
+ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+ARG NEXT_PUBLICSTRIPE_PUBLISHABLE_KEY = $NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+
+RUN npm run build
+
+
+
+# Run
+FROM base AS run
+
+ENV NODE_ENV=production
+ENV PORT=$PORT
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+COPY --from=build /app/public ./public
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE $PORT
+
+ENV HOSTNAME="0.0.0.0"
+CMD ["node", "server.js"]
+
+
+
+
+
