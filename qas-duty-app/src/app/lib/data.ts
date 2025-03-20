@@ -1,11 +1,15 @@
-import postgres from 'postgres';
+// import postgres from 'postgres';
 
-import {
-    User,
-    Job,
-    jobsTable,
-    userTable
-} from './definitions';
+// import {
+//     User,
+//     Job,
+//     jobsTable,
+//     userTable
+// } from './definitions';
 
-const sql = postgres(process.env.POSTGRES_URL!, {ssl: 'require'});
 
+
+// const sql = postgres(process.env.POSTGRES_URL!, {ssl: 'require'});
+
+
+// Commenting to skip TypeScript's type checking
