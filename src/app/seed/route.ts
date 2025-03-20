@@ -1,7 +1,6 @@
-import bcrypt from 'bcrypt';
 import postgres from 'postgres';
-import { users, jobs } from '../lib/placeholder-data';
-import {User, Job} from "../lib/definitions";
+import { users, jobs } from '../lib/db/placeholder-data';
+import {User, Job} from "../lib/db/definitions";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -9,19 +8,18 @@ async function seedUsers() {
     await sql`
         CREATE TABLE IF NOT EXISTS users (
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+            googleID VARCHAR(255) NOT NULL,
             name VARCHAR(255) NOT NULL,
             email TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL,
             path TEXT NOT NULL
         );
     `;
 
     const insertedUsers = await Promise.all(
         users.map(async (user: User) => {
-            const hashedPassword = await bcrypt.hash(user.password, 10);
             return sql `
-            INSERT INTO users (id, name, email, password, path)
-            VALUES ( ${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.path})
+            INSERT INTO users (id, googleId, name, email, path)
+            VALUES ( ${user.id}, ${user.googleId}, ${user.name}, ${user.email} , ${user.path})
             ON CONFLICT (id) DO NOTHING;
             `;
         }),

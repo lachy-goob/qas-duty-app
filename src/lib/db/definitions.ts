@@ -1,9 +1,16 @@
 export type User = {
     id: string;
+    googleId: string;
     name: string;
     email: string;
-    password: string;
     path: string;
+    picture: string;
+}
+
+export type user_session = {
+    id: string,
+    user_id: string,
+    expires_at: Date,
 }
 
 export type Job = {
