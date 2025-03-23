@@ -25,9 +25,12 @@ export async function createSession(token: string, userId: number): Promise <Ses
         expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
     }
     await db`
-        INSERT INTO user_session (id, user_id, expires_at)
-        VALUES (${session.id},${session.userId}, ${session.expiresAt}),`
-    return session;
+    INSERT INTO user_session (id, user_id, expires_at)
+    VALUES (${session.id}::TEXT, ${session.userId}, ${session.expiresAt})
+    RETURNING id
+`;
+return session;
+
 };
 
 
@@ -35,28 +38,21 @@ export async function validateSessionToken(token: string): Promise<SessionValida
     const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
 
     // Query the session and user from the database
-    const [row] = await db<{
-        id: string;
-        user_id: number;
-        expires_at: Date;
-        google_id: string;
-        email: string,
-        name: string,
-        picture: string,
-    }[]>`
+    const result = await db`
         SELECT 
             user_session.id,
             user_session.user_id,
             user_session.expires_at,
-            user.google_id,
-            user.email,
-            user.name,
-            user.picture
-            app_user.id AS user_id
-        FROM user_session
-        INNER JOIN app_user ON app_user.id = user_session.user_id
-        WHERE user_session.id = ${sessionId}
+            users.google_id,
+            users.email,
+            users.name,
+            users.picture
+            FROM user_session
+            INNER JOIN users ON users.id = user_session.user_id
+            WHERE user_session.id = ${sessionId}
     `;
+
+    const row = result[0]
 
     if (!row) {
         return { session: null, user: null };
@@ -105,7 +101,7 @@ export const getCurrentSession = cache(async (): Promise<SessionValidationResult
 });
 
 export async function invalidateSession(sessionId: string): Promise<void> {
-	await db `DELETE FROM user_session WHERE id = ?", sessionId`;
+	await db `DELETE FROM user_session WHERE id = ${sessionId}`;
 }
 
 export async function invalidateAllSessions(userId: number): Promise<void> {

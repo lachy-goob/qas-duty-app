@@ -6,12 +6,12 @@ async function logout(): Promise<void> {
 	"use server";
 	const { session } = await getCurrentSession();
 	if (!session) {
-		return redirect("login");
+		return redirect("/");
 	}
 
 	await invalidateSession(session.id);
 	//await deleteSessionTokenCookie();
-	return redirect("login");
+	return redirect("/");
 }
 
 export default async function Page() {

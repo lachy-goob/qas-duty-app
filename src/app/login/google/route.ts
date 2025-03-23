@@ -2,7 +2,6 @@ import { generateState, generateCodeVerifier } from "arctic";
 import { google } from "@/lib/server/oauth";
 import { cookies } from "next/headers";
 
-
 export async function GET(): Promise<Response> {
 
 	const state = generateState();
@@ -16,6 +15,7 @@ export async function GET(): Promise<Response> {
 		maxAge: 60 * 10, // 10 minutes
 		sameSite: "lax"
 	});
+
 	(await cookies()).set("google_code_verifier", codeVerifier, {
 		path: "/",
 		httpOnly: true,

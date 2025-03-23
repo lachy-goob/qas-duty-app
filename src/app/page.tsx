@@ -10,9 +10,12 @@ export default async function Home() {
   }
 
   return (
-
-    
-
+    <>
     <div>Home page</div>
+    <h1>Hi, {user.name}!</h1>
+    <img src={user.picture} height="100px" width="100px" alt="profile" />
+    <p>Email: {user.email}</p>
+
+    </>
   );
 }

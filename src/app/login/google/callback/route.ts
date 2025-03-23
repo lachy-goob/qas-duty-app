@@ -16,6 +16,7 @@ export async function GET(request: Request): Promise<Response> {
 			status: 400
 		});
 	}
+
 	if (state !== storedState) {
 		return new Response("Please restart the process.", {
 			status: 400
@@ -23,6 +24,7 @@ export async function GET(request: Request): Promise<Response> {
 	}
 
 	let tokens: OAuth2Tokens;
+	
 	try {
 		tokens = await google.validateAuthorizationCode(code, codeVerifier);
 	} catch {

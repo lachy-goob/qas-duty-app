@@ -1,7 +1,11 @@
 import { db } from "./db";
 
 export async function createUser(googleId: string, email: string, name: string, picture: string): Promise<User> {
-    const rows = await db `INSERT INTO user (google_id, email, name, picture) VALUES (${googleId}, ${email}, ${name}, ${picture}) RETURNING user.id`;
+    const rows = await db`
+    INSERT INTO users (google_id, email, name, picture)
+    VALUES (${googleId}, ${email}, ${name}, ${picture})
+    RETURNING id
+`;
     
     if (rows.length === 0) {
         throw new Error("Unexpected error: No rows returned");
@@ -19,8 +23,8 @@ export async function createUser(googleId: string, email: string, name: string, 
     return user;
 }
 
-export async function getUserFromGoogleId(googleId: string): Promise<User | null> {
-    const rows = await db `SELECT id, google_id, email, name, path, picture FROM user WHERE google_id = ${googleId}`;
+export async function getUserFromGoogleId(google_id: string): Promise<User | null> {
+    const rows = await db `SELECT id, google_id, email, name, path, picture FROM users WHERE google_id = ${google_id}`;
     
     if (rows.length === 0) {
         return null;
