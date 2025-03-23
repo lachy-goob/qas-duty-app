@@ -1,6 +1,5 @@
 import { getCurrentSession, invalidateSession } from "@/lib/server/session";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 async function logout(): Promise<void> {
 	"use server";

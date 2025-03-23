@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentSession } from "@/lib/server/session";
+import Image from "next/image";
 
 export default async function Home() {
 
@@ -13,7 +14,7 @@ export default async function Home() {
     <>
     <div>Home page</div>
     <h1>Hi, {user.name}!</h1>
-    <img src={user.picture} height="100px" width="100px" alt="profile" />
+    <Image src={user.picture} height="100" width="100" alt="profile" />
     <p>Email: {user.email}</p>
 
     </>

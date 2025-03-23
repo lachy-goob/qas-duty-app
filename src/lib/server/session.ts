@@ -105,7 +105,7 @@ export async function invalidateSession(sessionId: string): Promise<void> {
 }
 
 export async function invalidateAllSessions(userId: number): Promise<void> {
-	await db `DELETE FROM user_session WHERE user_id = ?", userId`;
+	await db `DELETE FROM user_session WHERE user_id = ${userId}`;
 }
 
 export async function setSessionTokenCookie(token: string, expiresAt: Date): Promise<void> {
