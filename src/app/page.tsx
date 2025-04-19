@@ -1,10 +1,4 @@
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import QasLogo from "./ui/images";
 
 export default function Page() {
@@ -23,9 +17,7 @@ export default function Page() {
             <SignUpButton />
           </SignedOut>
         </div>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <SignedIn></SignedIn>
       </div>
     </div>
   );
