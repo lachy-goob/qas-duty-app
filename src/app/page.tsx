@@ -17,7 +17,9 @@ export default function Page() {
             <SignUpButton />
           </SignedOut>
         </div>
-        <SignedIn></SignedIn>
+        <SignedIn>
+          <h1> Enter </h1>
+        </SignedIn>
       </div>
     </div>
   );
