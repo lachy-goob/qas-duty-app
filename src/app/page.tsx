@@ -1,22 +1,32 @@
-import { redirect } from "next/navigation";
-import { getCurrentSession } from "@/lib/server/session";
-import Image from "next/image";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+import QasLogo from "./ui/images";
 
-export default async function Home() {
-
-  const { user } = await getCurrentSession();
-
-  if (user === null) {
-    return redirect("/login")
-  }
-
+export default function Page() {
   return (
-    <>
-    <div>Home page</div>
-    <h1>Hi, {user.name}!</h1>
-    <Image src={user.picture} height="100" width="100" alt="profile" />
-    <p>Email: {user.email}</p>
-
-    </>
+    <div className="h-screen w-screen flex justify-center items-center bg-black">
+      <div className="flex flex-col items-center gap-4 bg-gray-800 p-20 rounded-2xl">
+        <div className="flex flex-col pb-20 items-center justify-center">
+          <div className="pb-2">
+            <QasLogo />
+          </div>
+          <h1 className="font-bold">Duty Calculator</h1>
+        </div>
+        <div className="flex gap-4">
+          <SignedOut>
+            <SignInButton />
+            <SignUpButton />
+          </SignedOut>
+        </div>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
+    </div>
   );
 }

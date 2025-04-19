@@ -1,10 +1,7 @@
-import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/ui/Header";
-import Footer from "@/app/ui/Footer";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QAS Duty",
-  description: "QAS Duty Tracking WebApp",
+  title: "QAS Application",
+  description: "NULL",
 };
 
 export default function RootLayout({
@@ -28,16 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <Analytics />
-    <Header/>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-    <Footer />
+      <ClerkProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
     </>
   );
 }

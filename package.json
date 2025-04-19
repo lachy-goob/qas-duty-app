@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/unstorage-adapter": "^2.8.0",
+    "@clerk/nextjs": "^6.15.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@pilcrowjs/object-parser": "^0.0.4",
