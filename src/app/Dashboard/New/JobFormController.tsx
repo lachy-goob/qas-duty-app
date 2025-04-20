@@ -1,11 +1,10 @@
+"use client";
+
 import React, { useState } from "react";
-import { currentUser } from "@clerk/nextjs/server";
 
-const user = await currentUser();
-
-const JobFormController = () => {
+const JobFormController = ({ user }: { user: { id: string } | null }) => {
   const [formData, setFormData] = useState({
-    user_id: user?.id,
+    user_id: user?.id || "",
     shiftType: "",
     dispatchTime: "",
     clearTime: "",

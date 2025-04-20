@@ -1,17 +1,10 @@
-import React from "react";
+import { currentUser } from "@clerk/nextjs/server";
 import JobFormController from "./JobFormController";
 
-const JobFormPage = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white">
-      <div className="bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-xl">
-        <h2 className="text-2xl font-semibold mb-6 text-center">
-          Create New Job
-        </h2>
-        <JobFormController />
-      </div>
-    </div>
-  );
+const JobFormPage = async () => {
+  const user = await currentUser();
+
+  return <JobFormController user={user} />;
 };
 
 export default JobFormPage;
