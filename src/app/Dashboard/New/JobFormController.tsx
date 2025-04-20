@@ -31,8 +31,10 @@ const JobFormController = ({ user }: { user: { id: string } | null }) => {
       return;
     }
 
+    //
+
     try {
-      const response = await fetch("/api/jobs", {
+      const response = await fetch("/api/inngest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
