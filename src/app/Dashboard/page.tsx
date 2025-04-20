@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { db } from "../db";
 import Link from "next/link";
 
 export default async function Page() {
