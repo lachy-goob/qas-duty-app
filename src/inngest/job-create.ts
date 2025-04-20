@@ -1,13 +1,16 @@
 import { inngest } from "@/inngest/client";
 import { db } from "@/app/db";
 import { Job } from "@/app/db/schema";
+import { currentUser } from "@clerk/nextjs/server";
+
+const user = await currentUser();
 
 export const createJob = inngest.createFunction(
   { id: "create-job" },
   { event: "job/create" },
   async ({ event }) => {
     const {
-      user_id,
+      user_id = user?.id,
       shiftType,
       dispatchTime,
       clearTime,
