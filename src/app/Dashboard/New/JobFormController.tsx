@@ -1,5 +1,6 @@
 "use client";
 
+import { inngest } from "@/inngest/client";
 import React, { useState } from "react";
 
 const JobFormController = ({ user }: { user: { id: string } | null }) => {
@@ -34,13 +35,13 @@ const JobFormController = ({ user }: { user: { id: string } | null }) => {
     //
 
     try {
-      const response = await fetch("/api/inngest", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      await inngest.send({
+        name: "app/job-created",
+        data: {
+          body: JSON.stringify(formData),
+        },
       });
 
-      if (!response.ok) throw new Error("Failed to create job");
       alert("Job created successfully!");
     } catch (error) {
       console.error(error);

@@ -4,7 +4,7 @@ import { Job } from "@/app/db/schema";
 
 export const createJob = inngest.createFunction(
   { id: "create-job" },
-  { event: "job/create" },
+  { event: "app/job-created" },
   async ({ event }) => {
     const {
       user_id,
