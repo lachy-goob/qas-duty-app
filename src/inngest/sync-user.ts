@@ -1,6 +1,7 @@
 import { inngest } from "./client";
 import { db } from "@/app/db";
 import { User } from "@/app/db/schema";
+import { redirect } from "next/navigation";
 
 export const syncUser = inngest.createFunction(
   { id: "sync-user-from-clerk" },
@@ -18,10 +19,16 @@ export const syncUser = inngest.createFunction(
       throw new Error("No email address found");
     }
 
-    await db.insert(User).values({
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: email,
-    });
+    try {
+      await db.insert(User).values({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: email,
+      });
+    } catch {
+      throw new Error("Error Inputting Data into DB");
+    }
+
+    redirect("/Dashboard");
   }
 );

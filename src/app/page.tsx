@@ -1,5 +1,6 @@
 import { SignInButton, SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import QasLogo from "./ui/images";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -18,7 +19,7 @@ export default function Page() {
           </SignedOut>
         </div>
         <SignedIn>
-          <h1> Enter </h1>
+          <Link href="/Dashboard"> Enter </Link>
         </SignedIn>
       </div>
     </div>
