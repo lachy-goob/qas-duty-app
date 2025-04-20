@@ -2,10 +2,6 @@ import { inngest } from "@/inngest/client";
 import { db } from "@/app/db";
 import { Job } from "@/app/db/schema";
 
-/**
- * Inngest function to handle job creation event.
- * This would be triggered by a custom event (e.g. 'job/create')
- */
 export const createJob = inngest.createFunction(
   { id: "create-job" },
   { event: "job/create" },
