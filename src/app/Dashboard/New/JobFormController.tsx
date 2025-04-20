@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { currentUser } from "@clerk/nextjs/server";
+
+const user = await currentUser();
 
 const JobFormController = () => {
   const [formData, setFormData] = useState({
+    user_id: user?.id,
     shiftType: "",
     dispatchTime: "",
     clearTime: "",
